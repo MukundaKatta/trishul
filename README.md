@@ -1,56 +1,28 @@
-# 🔱 Trishul — AI Penetration Testing
+# trishul — AI Penetration Testing. AI-assisted penetration testing framework
 
-> **Hindu Mythology**: Divine Trident | AI-assisted penetration testing framework
+AI Penetration Testing. AI-assisted penetration testing framework. trishul gives you a focused, inspectable implementation of that idea.
 
-[![GitHub Pages](https://img.shields.io/badge/🌐_Live_Demo-Visit_Site-blue?style=for-the-badge)](https://MukundaKatta.github.io/trishul/)
-[![GitHub](https://img.shields.io/github/license/MukundaKatta/trishul?style=flat-square)](LICENSE)
-[![Stars](https://img.shields.io/github/stars/MukundaKatta/trishul?style=flat-square)](https://github.com/MukundaKatta/trishul/stargazers)
+## Why trishul
 
-## 🚀 Overview
+trishul exists to make this workflow practical. Ai penetration testing. ai-assisted penetration testing framework. It favours a small, inspectable surface over sprawling configuration.
 
-AI-assisted penetration testing framework
+## How It Works
 
-**Tech Stack:** Python
+The code is organised as a focused, single-purpose module with a clear entry point and minimal ceremony.
 
-## 📦 Quick Start
+## Getting Started
 
-```bash
-git clone https://github.com/MukundaKatta/trishul.git
-cd trishul
-# Follow setup instructions below
-```
+Clone the repository and inspect the source to see how to run it.
 
-## 🏗️ Project Structure
+## Usage
+
+See the source files and entry points for concrete usage patterns.
+
+## Project Structure
 
 ```
 trishul/
-├── README.md
-├── LICENSE
 ├── CLAUDE.md
-├── .gitignore
-├── src/
-│   ├── main.py
-│   ├── config.py
-│   └── utils.py
-├── tests/
-│   └── test_main.py
-├── docs/
-│   └── architecture.md
-├── examples/
-│   └── basic_usage.py
-└── .github/
-    └── workflows/
-        └── static.yml
+├── LICENSE
+├── README.md
 ```
-
-## 🌐 Live Demo
-
-Visit the landing page: **https://MukundaKatta.github.io/trishul/**
-
-## 📄 License
-
-MIT License — © 2026 Officethree Technologies
-
-## 🔱 Part of the Mythological Portfolio
-
-This is project **#trishul** in the [100-project Mythological Portfolio](https://github.com/MukundaKatta) by Officethree Technologies.
