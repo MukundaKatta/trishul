@@ -1,6 +1,6 @@
 # trishul — AI Penetration Testing. AI-assisted penetration testing framework
 
-AI Penetration Testing. AI-assisted penetration testing framework. trishul gives you a focused, inspectable implementation of that idea.
+AI Penetration Testing. AI-assisted penetration testing framework.
 
 ## Why trishul
 
