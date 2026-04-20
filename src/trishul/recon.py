@@ -37,6 +37,24 @@ class ScopeDecision:
     reason: str
 
 
+@dataclass(frozen=True)
+class EvidenceItem:
+    kind: str
+    path: str
+    summary: str
+    sensitivity: str = "internal"
+
+
+@dataclass(frozen=True)
+class Finding:
+    finding_id: str
+    title: str
+    severity: str
+    confidence: float
+    evidence: tuple[EvidenceItem, ...]
+    validation_notes: tuple[str, ...]
+
+
 def parse_target(raw: str) -> Target | None:
     """Classify a target string. Returns None if we can't parse it."""
     raw = raw.strip()
@@ -129,3 +147,54 @@ def gate(
             continue
         decisions.append(check_scope(t, scope))
     return decisions, errors
+
+
+def validate_finding(
+    finding_id: str,
+    title: str,
+    severity: str,
+    confidence: float,
+    evidence: Iterable[EvidenceItem],
+    notes: Iterable[str] = (),
+) -> Finding:
+    bounded_confidence = max(0.0, min(1.0, round(confidence, 3)))
+    validation_notes = list(notes)
+    if bounded_confidence < 0.6:
+        validation_notes.append("Needs manual reviewer confirmation before client delivery.")
+    if severity.lower() in {"critical", "high"}:
+        validation_notes.append("Confirm exploit path and remediation guidance.")
+    return Finding(
+        finding_id=finding_id,
+        title=title,
+        severity=severity.lower(),
+        confidence=bounded_confidence,
+        evidence=tuple(evidence),
+        validation_notes=tuple(dict.fromkeys(validation_notes)),
+    )
+
+
+def build_client_safe_report(findings: Iterable[Finding]) -> dict[str, object]:
+    packaged_findings = []
+    for finding in findings:
+        packaged_findings.append(
+            {
+                "finding_id": finding.finding_id,
+                "title": finding.title,
+                "severity": finding.severity,
+                "confidence": finding.confidence,
+                "evidence": [
+                    {
+                        "kind": item.kind,
+                        "summary": item.summary,
+                    }
+                    for item in finding.evidence
+                    if item.sensitivity != "restricted"
+                ],
+                "validation_notes": list(finding.validation_notes),
+            }
+        )
+    return {
+        "finding_count": len(packaged_findings),
+        "findings": packaged_findings,
+        "disclaimer": "Restricted evidence paths have been stripped from this client-safe report.",
+    }
